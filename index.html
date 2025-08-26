@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>kinnaruchann</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 200vh;
+      background-color: black;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+    }
+
+    .background {
+      width: 100%;
+      height: 100vh; /* tinggi background image = 1 layar */
+      background: url("bg.jpg") no-repeat center center;
+      background-size: cover;
+      filter: brightness(0.5);
+
+      display: flex;
+      justify-content: center; /* horizontal center */
+      align-items: center; /* vertical center */
+    }
+
+    /* layar welcome */
+    #welcome {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: black;
+      z-index: 10;
+      transition: opacity 1.5s ease;
+    }
+
+    #welcome.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #welcome h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 0px 2px 6px rgba(255,255,255,0.4);
+    }
+
+    #welcome button {
+      padding: 0.8rem 2rem;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+      background-color: white;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #welcome button:hover {
+      background-color: #ddd;
+    }
+
+    /* konten utama */
+    #main {
+      position: relative;
+      z-index: 1;
+      height: 100vh;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background: none; /* kosongin di sini */
+    }
+
+    /* lapisan gelap background */
+    #main::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6); 
+      z-index: 0;
+    }
+
+    /* container untuk konten (di atas hujan) */
+    .content-box {
+      position: relative;
+      z-index: 3;
+      background: rgba(0,0,0,0.9);
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 400px;
+    }
+
+    .content-box h1 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 0px 2px 8px rgba(0,0,0,0.8);
+      color: #fff;
+    }
+
+    .content-box p {
+      margin: 0.5rem 0 1.5rem;
+      color: #fff;
+    }
+
+    .content-box a {
+      color: #fff;
+    }
+
+    .profile-wrapper {
+      position: relative;
+      width: 100px;  /* atur sesuai ukuran profil */
+      height: 100px;
+      margin: 0 auto 1rem;
+    }
+
+    .profile-container {
+      position: relative;
+      width: 100px; /* atur sesuai kebutuhan */
+      height: 100px;
+      margin: 0 auto 1rem;
+    }
+
+    .profile-pic {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%; /* jadi bulat */
+      object-fit: cover;
+      display: block;
+    }
+
+    .profile-frame {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120%;
+      height: 120%;
+      transform: translate(-50%, -50%);
+      pointer-events: none; /* biar gak ngehalangin klik */
+    }
+
+    /* social media links */
+    .socials {
+      margin-top: 1rem;
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .socials a img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      transition: transform 0.3s;
+      border-radius: 12px;
+    }
+
+    .socials a img:hover {
+      transform: scale(1.1);
+    }
+
+    /* hujan */
+    .rain {
+      position: absolute;
+      width: 2px;
+      height: 15px;
+      background: rgba(255,255,255,0.3); /* lebih transparan */
+      animation: rain 0.4s linear infinite;
+      top: -20px;
+      z-index: 1; /* di atas background, di bawah konten */
+    }
+
+    .after-bg {
+      background: black;
+      padding: 4rem 1rem;
+    }
+
+    @keyframes rain {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Layar welcome -->
+  <div id="welcome">
+    <h1>Welcome to my website!</h1>
+    <button onclick="startWebsite()">Click to start</button>
+  </div>
+
+  <!-- Konten utama -->
+  <div id="main">
+    <!-- Background -->
+    <div class="background">
+      <!-- Kotak konten -->
+      <div class="content-box">
+        <!-- Foto profil + frame -->
+        <div class="profile-wrapper">
+          <img src="profile.jpg" alt="Foto Profil" class="profile-pic">
+          <img src="frame.png" alt="Frame" class="profile-frame">
+        </div>
+        <h1>kinnaruchann</h1>
+        <p>Digital Creator</p>
+
+        <!-- Ikon Sosial Media -->
+        <div class="socials">
+          <a href="https://discord.gg/FWUdGhbbuj" target="_blank">
+            <img src="dc.png" alt="Discord">
+          </a>
+          <a href="https://instagram.com/_kinnaruchann" target="_blank">
+            <img src="ig.png" alt="Instagram">
+          </a>
+          <a href="https://open.spotify.com/user/316rgkxmdbhvmc3yqtgseakblxje?si=5493bdfdae1f46c4" target="_blank">
+            <img src="spotify.png" alt="Spotify">
+          </a>
+          <a href="https://tiktok.com/@kinnaruchann" target="_blank">
+            <img src="tt.png" alt="TikTok">
+          </a>
+          <a href="https://youtube.com/@kinnaruchann" target="_blank">
+            <img src="yt.png" alt="YouTube">
+          </a>
+        </div>
+      </div>  
+    </div>
+  </div>
+
+  <!-- bawah setelah background -->
+  <div class="after-bg">
+    <h2>Coming Soon...</h2>
+    <p>-kinnaruchann-</p>
+  </div>
+
+  <!-- Musik background -->
+  <audio id="bg-music" loop>
+    <source src="bg-music.mp3" type="audio/mpeg">
+    Browser kamu tidak mendukung audio.
+  </audio>
+
+  <script>
+    // generate hujan
+    function createRain() {
+      for (let i = 0; i < 80; i++) {
+        let drop = document.createElement("div");
+        drop.classList.add("rain");
+        drop.style.left = Math.random() * window.innerWidth + "px";
+        drop.style.animationDuration = (0.6 + Math.random() * 0.6) + "s";
+        drop.style.opacity = 0.2 + Math.random() * 0.2; // lebih transparan
+        document.getElementById("main").appendChild(drop);
+
+        setTimeout(() => { drop.remove(); }, 2000);
+      }
+    }
+    setInterval(createRain, 300);
+
+    // start website
+    function startWebsite() {
+      const welcome = document.getElementById("welcome");
+      const main = document.getElementById("main");
+      const music = document.getElementById("bg-music");
+
+      welcome.classList.add("fade-out");
+      setTimeout(() => {
+        welcome.style.display = "none";
+        main.style.display = "flex";
+        main.style.flexDirection = "column";
+        main.style.justifyContent = "center";
+        main.style.alignItems = "center";
+      }, 1500);
+
+      music.play();
+    }
+  </script>
+</body>
+</html>
